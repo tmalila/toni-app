@@ -1,14 +1,45 @@
 import React from "react";
+/** @jsx jsx */
+import { css, jsx } from '@emotion/core'
+import InvoiceList from "./InvoiceList";
+import { InvoiceType } from "./Invoice";
 
 interface Props {
 
 };
 
+const invoices: InvoiceType[] = [
+  {
+    id: "1",
+    date: new Date().toLocaleDateString(),
+    status: "Valmis",
+    title: "Lasku 1"
+  },
+  {
+    id: "2",
+    date: new Date().toLocaleDateString(),
+    status: "Odottaa",
+    title: "Lasku 2"
+  },
+  {
+    id: "3",
+    date: new Date().toLocaleDateString(),
+    status: "Valmis",
+    title: "Lasku 3"
+  },
+]
+
 const InvoicePage: React.FunctionComponent<Props> = props => {
 
   return(
-    <div>
-      <h1>This is the InvoicePage</h1>
+    <div
+      css={theme => ({
+        width: "100%",
+        padding: "1rem",
+        color: theme.colors.text,
+      })}
+    >
+      <InvoiceList invoices={invoices}></InvoiceList>
     </div>
   );
 }

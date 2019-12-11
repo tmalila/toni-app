@@ -28,7 +28,7 @@ const AppHeader: React.FunctionComponent<Props> = props => {
           width: "100%"
         })}
       >
-        Hello header
+        Toni App
       </span>
       <DarkModeButton toggleDarkMode={toggleDarkMode} darkMode={darkMode}></DarkModeButton>
     </div>

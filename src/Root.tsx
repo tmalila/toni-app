@@ -68,6 +68,7 @@ const Root: React.FunctionComponent = () => {
                 html: {
                   fontFamily: "Roboto",
                   fontSize: "16px",
+                  fontWeight: 500
                 },
                 body: {
                   background: `${theme.colors.bg}`,
