@@ -17,7 +17,6 @@ const todoRoutes = express.Router();
 // });
 
 todoRoutes.get('/todos', async (req: express.Request, resp: express.Response, next: express.NextFunction) => {
-    console.log("Getting todos!");
     TodoModel.find({}, (error: Error, todos: MongooseDocument) => {
         if (error) {
           resp.send(error);
@@ -28,7 +27,6 @@ todoRoutes.get('/todos', async (req: express.Request, resp: express.Response, ne
  
 todoRoutes.post('/todo', async (req: express.Request, resp: express.Response, next: express.NextFunction) => {
     const newTodo = new TodoModel(req.body);
-    console.log("Inserting new Todo:", newTodo);
     newTodo.save((error: Error, todo: MongooseDocument) => {
       if (error) {
         resp.send(error);
