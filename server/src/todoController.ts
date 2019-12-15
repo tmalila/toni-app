@@ -1,50 +1,68 @@
 import * as express from 'express';
-import * as mongodb from 'mongodb';
-import { MongoHelper } from './mongo-helper';
+import { TodoModel } from './todo';
+import { MongooseDocument } from 'mongoose';
  
 const todoRoutes = express.Router();
  
-const getCollection = () => {
-  return MongoHelper.client.db('todo').collection('todos');
-}
- 
-todoRoutes.get('/todo', (req: express.Request, resp: express.Response, next: express.NextFunction) => {
-  const collection: any = getCollection();
-  const result = collection.find({}).toArray((err, items) => {
-    if (err) {
-      resp.status(500);
-      resp.end();
-      console.error('Caught error', err);
-    } else {
-      items = items.map((item) => { return { id: item._id, description: item.description}});
-      resp.json(items);
-    }
-  });
+// todoRoutes.get('/todo', async (req: express.Request, resp: express.Response, next: express.NextFunction) => {
+//     try {
+//         let items: any = await TodoModel.find({});
+//         items = items.map((item) => { return {id: item._id, description: item.description}});
+//         resp.json(items);
+//     } catch (err) {
+//         resp.status(500);
+//         resp.end();
+//         console.error('Caught error', err);
+//     }
+// });
+
+todoRoutes.get('/todos', async (req: express.Request, resp: express.Response, next: express.NextFunction) => {
+    console.log("Getting todos!");
+    TodoModel.find({}, (error: Error, todos: MongooseDocument) => {
+        if (error) {
+          resp.send(error);
+        }
+        resp.json(todos);
+      });
 });
  
-todoRoutes.post('/todo', (req: express.Request, resp: express.Response, next: express.NextFunction) => {
-  const description = req.body['description'];
- 
-  const collection: any = getCollection();
-  collection.insert({description: description});
- 
-  resp.end();
+todoRoutes.post('/todo', async (req: express.Request, resp: express.Response, next: express.NextFunction) => {
+    const newTodo = new TodoModel(req.body);
+    console.log("Inserting new Todo:", newTodo);
+    newTodo.save((error: Error, todo: MongooseDocument) => {
+      if (error) {
+        resp.send(error);
+      }
+      resp.json(todo);
+    });
 });
  
-todoRoutes.put('/todo/:id', (req: express.Request, resp: express.Response, next: express.NextFunction) => {
-  const id = req.params['id'];
-  const description = req.body['description'];
-  const collection: any = getCollection();
-  collection.findOneAndUpdate({"_id": new mongodb.ObjectId(id)}, {$set: {"description": description}});
-  resp.end();
+todoRoutes.put('/todo/:id', async (req: express.Request, resp: express.Response, next: express.NextFunction) => {
+    const todoId = req.params.id;
+    TodoModel.findByIdAndUpdate(
+        todoId,
+      req.body,
+      (error: Error, todo: any) => {
+        if (error) {
+          resp.send(error);
+        }
+        const message = todo
+          ? 'Updated successfully'
+          : 'TODO not found :(';
+        resp.send(message);
+      }
+    );
 });
  
-todoRoutes.delete('/todo/:id', (req: express.Request, resp: express.Response, next: express.NextFunction) => {
-  const id = req.params['id'];
-  const collection: any = getCollection();
-  collection.remove({"_id": new mongodb.ObjectId(id)});
- 
-  resp.end();
+todoRoutes.delete('/todo/:id', async (req: express.Request, resp: express.Response, next: express.NextFunction) => {
+    const todoId = req.params.id;
+    TodoModel.findByIdAndDelete(todoId, (error: Error, deleted: any) => {
+      if (error) {
+        resp.send(error);
+      }
+      const message = deleted ? 'Deleted successfully' : 'TODO not found :(';
+      resp.send(message);
+    });
 });
  
 export { todoRoutes }

@@ -1,8 +1,9 @@
 import { app } from './app';
 import * as http from 'http';
 import { MongoHelper } from './mongo-helper';
+import mongoose from "mongoose";
+import { MONGO_URL, PORT } from './constants';
  
-const PORT = 8888;
 const server = http.createServer(app);
  
 server.listen(PORT);
@@ -11,10 +12,11 @@ console.error(err);
 });
 server.on('listening', async () => {
   console.info(`Listening on port ${PORT}`);
-  try {
-    await MongoHelper.connect(`mongodb://10.0.0.129:27017/todo`);
-    console.info(`Connected to Mongo!`);
-  } catch (err) {
-    console.error(`Unable to connect to Mongo!`, err);
-  }
+  mongoose.connect(MONGO_URL, { useNewUrlParser: true });
+  mongoose.connection.once('open', () => {
+      console.info('Connected to Mongo via Mongoose');
+  });
+  mongoose.connection.on('error', (err) => {
+      console.error('Unable to connect to Mongo via Mongoose', err);
+  });
 });
