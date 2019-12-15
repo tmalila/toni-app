@@ -28,14 +28,6 @@ const Invoice: FunctionComponent<Props> = props => {
       padding: "0.5rem 0.5rem 0.5rem 0",
       color: theme.colors.text,
       marginBottom: "1rem",
-      ":after": {
-        content: "",
-        display: "block",
-        margin: "0 auto",
-        width: "50%",
-        paddingTop: "20px",
-        borderBottom: "1px solid red"
-      }
     })}
     >
       <div

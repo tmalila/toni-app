@@ -3,10 +3,13 @@ import React from "react";
 import { css, jsx } from '@emotion/core'
 import InvoiceList from "./InvoiceList";
 import { InvoiceType } from "./Invoice";
+import dataService from "../services/dataservice";
 
 interface Props {
 
 };
+
+const todos = dataService.getTodos();
 
 const invoices: InvoiceType[] = [
   {
