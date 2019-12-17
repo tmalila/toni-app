@@ -17,7 +17,7 @@ const InvoiceList: FunctionComponent<Props> = props => {
     <p>Avoimet laskut</p>
     <div>
     {invoices.map((invoice: InvoiceType) => (
-      <Invoice invoice={invoice} key={invoice.id}></Invoice>
+      <Invoice invoice={invoice} key={invoice._id}></Invoice>
     ))}
     </div>
     </>

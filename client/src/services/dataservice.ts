@@ -8,6 +8,13 @@ export const getTodos = async () => {
   return ret.data;
 };
 
+export const getInvoices = async () => {
+  const ret = await axios.get(`${API_URL}/invoices`);
+  console.log("got the invoices:", ret.data);
+  return ret.data;
+};
+
 export default {
   getTodos,
+  getInvoices,
 };

@@ -10,9 +10,10 @@ interface Props {
 };
 
 export interface InvoiceType {
-  id: string,
+  _id: string,
   title: string,
   status: string,
+  sumTotal: number,
   date: string
 };
 

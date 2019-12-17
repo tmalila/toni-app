@@ -1,5 +1,5 @@
 import * as express from 'express';
-import { TodoModel } from './todo';
+import { TodoModel } from '../models/todo';
 import { MongooseDocument } from 'mongoose';
  
 const todoRoutes = express.Router();
