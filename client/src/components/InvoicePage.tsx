@@ -3,47 +3,24 @@ import React, { useState, useEffect } from "react";
 import { css, jsx } from '@emotion/core'
 import InvoiceList from "./InvoiceList";
 import { InvoiceType } from "./Invoice";
-import dataService from "../services/dataservice";
 import { List } from "immutable";
+import { useDispatch, useSelector } from "react-redux";
+import { GET_INVOICES } from "../ducks/invoice";
 
 interface Props {
-
 };
-
-// const todos = dataService.getTodos();
-// const invoices = await dataService.getInvoices();
-
-// const invoices: InvoiceType[] = [
-//   {
-//     _id: "1",
-//     date: new Date().toLocaleDateString(),
-//     status: "Valmis",
-//     title: "Lasku 1",
-//     sumTotal: 123
-//   },
-//   {
-//     _id: "2",
-//     date: new Date().toLocaleDateString(),
-//     status: "Odottaa",
-//     title: "Lasku 2",
-//     sumTotal: 221
-//   },
-//   {
-//     _id: "3",
-//     date: new Date().toLocaleDateString(),
-//     status: "Valmis",
-//     title: "Lasku 3",
-//     sumTotal: 311
-//   },
-// ]
 
 const InvoicePage: React.FunctionComponent<Props> = props => {
 
-  const [invoices, setInvoices] = useState<List<InvoiceType>>(List<InvoiceType>());
-
+  const dispatch = useDispatch();
+  const invoices: List<InvoiceType> = useSelector((state: any) => state.invoice.toList());
+  
   useEffect(() => {
-    dataService.getInvoices().then(invoiceArr => setInvoices(List(invoiceArr)));
-  }, [])
+    dispatch({
+      type: GET_INVOICES
+    });
+  }, [dispatch]);
+
 
   return(
     <div

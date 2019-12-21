@@ -12,7 +12,6 @@ const InvoiceList: FunctionComponent<Props> = props => {
   if (invoices.count() === 0) {
     return null;
   }
-
   return(
     <>
     <p>Avoimet laskut</p>

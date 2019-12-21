@@ -3,8 +3,16 @@ import App from "./components/App";
 import { Global, css } from "@emotion/core";
 import emotionNormalize from 'emotion-normalize';
 import { ThemeProvider } from 'emotion-theming'
+import { Store } from "redux";
+import { Provider } from "react-redux";
 
-const Root: React.FunctionComponent = () => {
+interface Props {
+  store: Store;
+}
+
+const Root: React.FunctionComponent<Props> = props => {
+  const { store } = props;
+
   const [darkMode, setdarkMode] = useState(false);
 
   const lightTheme = {
@@ -81,7 +89,9 @@ const Root: React.FunctionComponent = () => {
               })
             ]}
           />
-          <App toggleDarkMode={toggleDarkMode} darkMode={darkMode}></App>
+          <Provider store={store}>
+            <App toggleDarkMode={toggleDarkMode} darkMode={darkMode}></App>
+          </Provider>
         </ThemeProvider>
     </>
   );
