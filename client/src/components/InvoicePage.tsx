@@ -4,6 +4,7 @@ import { css, jsx } from '@emotion/core'
 import InvoiceList from "./InvoiceList";
 import { InvoiceType } from "./Invoice";
 import dataService from "../services/dataservice";
+import { List } from "immutable";
 
 interface Props {
 
@@ -38,10 +39,10 @@ interface Props {
 
 const InvoicePage: React.FunctionComponent<Props> = props => {
 
-  const [invoices, setInvoices] = useState<Array<InvoiceType>>([]);
+  const [invoices, setInvoices] = useState<List<InvoiceType>>(List<InvoiceType>());
 
   useEffect(() => {
-    dataService.getInvoices().then(invoiceArr => setInvoices((invoiceArr)));
+    dataService.getInvoices().then(invoiceArr => setInvoices(List(invoiceArr)));
   }, [])
 
   return(

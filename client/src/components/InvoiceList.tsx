@@ -1,14 +1,15 @@
 import React, { FunctionComponent } from "react";
 import Invoice, { InvoiceType } from "./Invoice";
+import { List } from "immutable";
 
 interface Props {
-  invoices: Array<InvoiceType>;
+  invoices: List<InvoiceType>;
 };
 
 const InvoiceList: FunctionComponent<Props> = props => {
   const {invoices} = props;
 
-  if (invoices.length === 0) {
+  if (invoices.count() === 0) {
     return null;
   }
 
