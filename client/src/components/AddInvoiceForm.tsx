@@ -43,7 +43,7 @@ const AddInvoiceForm: FunctionComponent<Props> = props => {
         return (
           <Form>
             <div>
-              <label>Title</label>
+              <label htmlFor="title">Title</label>
               <Field as={MaterialInput} type="text" name="title" />
               {errors.title && (
                 <span style={{ color: "red" }}>{errors.title}</span>

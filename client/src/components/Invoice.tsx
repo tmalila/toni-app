@@ -14,7 +14,8 @@ export interface InvoiceType {
   title?: string,
   status?: string,
   sumTotal?: number,
-  date?: string
+  date?: string,
+  isLoading?: boolean | false,
 };
 
 const Invoice: FunctionComponent<Props> = props => {

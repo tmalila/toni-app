@@ -1,13 +1,23 @@
-import React from "react";
+import React, { useCallback, useEffect } from "react";
 import AddInvoiceForm from "./AddInvoiceForm";
+import { InvoiceType } from "./Invoice";
+import { useSelector, useDispatch } from "react-redux";
+import { ADD_INVOICE } from "../ducks/invoice";
 
 interface Props{};
 
-const addInvoice = () => {
-  console.log("hello add invoice!!");
-}
-
 const AddInvoicePage: React.FunctionComponent<Props> = props => {
+  const dispatch = useDispatch();
+
+  const addInvoice = useCallback(
+    (invoice: InvoiceType) => {
+      dispatch({
+        type: ADD_INVOICE,
+        payload: invoice
+      });
+    },
+    [dispatch]
+  );
 
   return(
     <div>
