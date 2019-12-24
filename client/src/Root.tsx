@@ -5,6 +5,7 @@ import emotionNormalize from 'emotion-normalize';
 import { ThemeProvider } from 'emotion-theming'
 import { Store } from "redux";
 import { Provider } from "react-redux";
+import { BrowserRouter } from "react-router-dom";
 
 interface Props {
   store: Store;
@@ -90,7 +91,9 @@ const Root: React.FunctionComponent<Props> = props => {
             ]}
           />
           <Provider store={store}>
-            <App toggleDarkMode={toggleDarkMode} darkMode={darkMode}></App>
+            <BrowserRouter>
+              <App toggleDarkMode={toggleDarkMode} darkMode={darkMode}></App>
+            </BrowserRouter>
           </Provider>
         </ThemeProvider>
     </>
