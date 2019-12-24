@@ -10,11 +10,11 @@ interface Props {
 };
 
 export interface InvoiceType {
-  _id: string,
-  title: string,
-  status: string,
-  sumTotal: number,
-  date: string
+  _id?: string,
+  title?: string,
+  status?: string,
+  sumTotal?: number,
+  date?: string
 };
 
 const Invoice: FunctionComponent<Props> = props => {
