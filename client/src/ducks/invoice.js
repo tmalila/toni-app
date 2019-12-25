@@ -25,6 +25,9 @@ export default function invoiceReducer(state = defaultState, action) {
         };
       });
 
+    case ADD_INVOICE_FULFILLED:
+      return state.set(payload.id, payload);
+
     default:
       return state;
   }
