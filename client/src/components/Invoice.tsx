@@ -18,7 +18,7 @@ export interface InvoiceType {
   isLoading?: boolean | false,
 };
 
-const Invoice: FunctionComponent<Props> = props => {
+const Invoice: React.FunctionComponent<Props> = props => {
   const { invoice } = props;
   const theme: any = useTheme();
 

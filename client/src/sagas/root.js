@@ -7,6 +7,7 @@ import {
 } from "redux-saga/effects";
 import dataservice from "../services/dataservice";
 import { GET_INVOICES_FULFILLED, GET_INVOICES_REJECTED, GET_INVOICES, ADD_INVOICE_FULFILLED, ADD_INVOICE_REJECTED, ADD_INVOICE } from "../ducks/invoice";
+import { INCREMENT_LOADING_COUNT, DECREMENT_LOADING_COUNT } from "../ducks/ui";
 
 function* getInvoices() {
   const invoices = yield call(dataservice.getInvoices);
@@ -48,5 +49,18 @@ export default function* rootSaga() {
     takeEvery(ADD_INVOICE, function*(a) {
       yield* addInvoice(a.payload, a.history);
     }),
+    takeEvery([GET_INVOICES, ADD_INVOICE], function*() {
+      yield put({
+        type: INCREMENT_LOADING_COUNT
+      });
+    }),
+    takeEvery(
+      a => a.type.endsWith("_REJECTED") || a.type.endsWith("_FULFILLED"),
+      function*() {
+        yield put({
+          type: DECREMENT_LOADING_COUNT
+        });
+      }
+    )
   ])
 }

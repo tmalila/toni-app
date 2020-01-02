@@ -4,7 +4,8 @@ import InvoicePage from "./InvoicePage";
 import AppHeader from "./AppHeader";
 import { Switch, Route } from "react-router";
 import AddInvoicePage from "./AddInvoicePage";
-
+import { useSelector } from "react-redux";
+import LoadingSpinner from "./LoadingSpinner";
 
 const Button = styled.button`
   background-color: ${(props: any) => props.theme.colors.primary};
@@ -18,9 +19,14 @@ type Props = {
 const App: React.FC<Props> = props => {
   const { toggleDarkMode, darkMode } = props;
 
+  const isLoading: boolean = useSelector(
+    (state: any) => state.ui.get("loadingCount") > 0
+  );
+
   return (
     <div>
       <AppHeader toggleDarkMode={toggleDarkMode} darkMode={darkMode}></AppHeader>
+      {isLoading && <LoadingSpinner />}
       <Switch>
         <Route
           exact
