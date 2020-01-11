@@ -42,27 +42,19 @@ const AddInvoiceForm: FunctionComponent<Props> = props => {
       {({ errors, isValid }) => {
         return (
           <Form>
-            <div>
-              <label htmlFor="title">Title</label>
-              <Field as={MaterialInput} type="text" name="title" />
+              <Field as={MaterialInput} type="text" name="Title" />
               {errors.title && (
                 <span style={{ color: "red" }}>{errors.title}</span>
               )}
-            </div>
-            <div>
-              <label>Sum Total</label>
-              <Field as={MaterialInput} type="number" name="sumTotal" />
+              <Field as={MaterialInput} type="number" step="any" name="SumTotal" />
               {errors.sumTotal && (
                 <span style={{ color: "red" }}>{errors.sumTotal}</span>
               )}
-            </div>
-            <div>
               <label>Invoice Date</label>
               <Field type="date" name="date" />
               {errors.date && (
                 <span style={{ color: "red" }}>{errors.date}</span>
               )}
-            </div>
             <div>
               <MaterialButton disabled={!isValid} type="submit">
                 Submit
