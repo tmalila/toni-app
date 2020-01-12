@@ -1,6 +1,6 @@
-import styled from "@emotion/styled";
+import styled from "./styled";
 
-const MaterialButton = styled.button(({theme}: any) => ({
+const MaterialButton = styled.button(({theme}) => ({
   border: "none",
   cursor: "pointer",
   display: "inline-block",
