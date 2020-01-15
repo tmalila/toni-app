@@ -4,6 +4,7 @@ import bodyparser from 'body-parser';
 import { requestLoggerMiddleware } from './request-logger-middleware';
 import { todoRoutes } from './controllers/todoController';
 import { invoiceRoutes } from './controllers/invoiceController';
+import { imageRoutes } from './controllers/imageController';
 
 const app = express();
 app.use(cors());
@@ -15,5 +16,6 @@ app.use(bodyparser.urlencoded({ limit: '50mb', extended: true }));
 app.use(requestLoggerMiddleware);
 app.use(todoRoutes);
 app.use(invoiceRoutes);
+app.use(imageRoutes);
  
 export { app };
