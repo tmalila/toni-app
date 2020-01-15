@@ -5,6 +5,10 @@ import mongoose from "mongoose";
 import { MONGO_URL, PORT } from './constants';
  
 const server = http.createServer(app);
+
+if (process.env.NODE_ENV !== 'production') {
+  require('dotenv').load();
+}
  
 server.listen(PORT);
 server.on('error', (err) => {
