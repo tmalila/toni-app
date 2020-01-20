@@ -7,7 +7,11 @@ import { MONGO_URL, PORT } from './constants';
 const server = http.createServer(app);
 
 if (process.env.NODE_ENV !== 'production') {
+<<<<<<< HEAD
   require('dotenv').config()
+=======
+  require('dotenv').load();
+>>>>>>> afca4f615d966b92aa650332843fa4c01a5dd36e
 }
  
 server.listen(PORT);

@@ -132,6 +132,7 @@
   dependencies:
     "@types/express" "*"
 
+<<<<<<< HEAD
 "@types/dotenv@^8.2.0":
   version "8.2.0"
   resolved "https://registry.yarnpkg.com/@types/dotenv/-/dotenv-8.2.0.tgz#5cd64710c3c98e82d9d15844375a33bf1b45d053"
@@ -139,6 +140,8 @@
   dependencies:
     dotenv "*"
 
+=======
+>>>>>>> afca4f615d966b92aa650332843fa4c01a5dd36e
 "@types/express-serve-static-core@*":
   version "4.17.1"
   resolved "https://registry.yarnpkg.com/@types/express-serve-static-core/-/express-serve-static-core-4.17.1.tgz#82be64a77211b205641e0209096fd3afb62481d3"
@@ -597,7 +600,11 @@ dot-prop@^4.1.0:
   dependencies:
     is-obj "^1.0.0"
 
+<<<<<<< HEAD
 dotenv@*, dotenv@^8.2.0:
+=======
+dotenv@^8.2.0:
+>>>>>>> afca4f615d966b92aa650332843fa4c01a5dd36e
   version "8.2.0"
   resolved "https://registry.yarnpkg.com/dotenv/-/dotenv-8.2.0.tgz#97e619259ada750eea3e4ea3e26bceea5424b16a"
   integrity sha512-8sJ78ElpbDJBHNeBzUbUVLsqKdccaa/BXF1uPTw3GrvQTBgrQrtObr2mUrE38vzYd8cEv+m/JBfDLioYcfXoaw==
