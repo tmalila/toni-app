@@ -27,13 +27,14 @@ imageRoutes.post('/image/upload', uploadStrategy, async (req: express.Request, r
     const blobClient = new BlockBlobClient(azureConn, CONTAINER_NAME, blobName);
     const fileStreamObj = intoStream.default(req.file.buffer);
     const contType = req.file.mimetype;
-    const options = { blobHTTPHeaders: { blobContentType: contType} } as BlockBlobUploadStreamOptions;
+    const options: BlockBlobUploadStreamOptions = { blobHTTPHeaders: { blobContentType: contType} };
     const result = await blobClient.uploadStream(fileStreamObj, undefined, undefined, options);
     if(result.errorCode) {
-      next(result._response.request);
+      resp.json(result.errorCode.toString());
     }
     else {
-      resp.json(blobName);
+      const responseObj = { blobName: blobName, file: req.file }
+      resp.json(responseObj);
     }
   }
   catch(exception) {
