@@ -4,6 +4,7 @@ import { Formik, Field, Form } from "formik";
 import * as Yup from "yup";
 import MaterialInput from "./MaterialInput";
 import MaterialButton from "./MaterialButton";
+import FileUpload from "./FileUpload";
 
 const schema = Yup.object().shape({
   title: Yup.string()
@@ -24,46 +25,50 @@ const AddInvoiceForm: FunctionComponent<Props> = props => {
   const { addInvoice } = props;
 
   return(
-    <Formik
-      validationSchema={schema}
-      initialValues={{
-        date: new Date().toISOString().split('T')[0],
-        title: "",
-        sumTotal: 0
-      }}
-      onSubmit={values => {
-        const newInvoice = {
-          ...values,
-          status: "Odottaa",
-        };
-        addInvoice(newInvoice);
-      }}
-    >
-      {({ errors, isValid }) => {
-        return (
-          <Form>
-              <Field as={MaterialInput} type="text" name="Title" />
-              {errors.title && (
-                <span style={{ color: "red" }}>{errors.title}</span>
-              )}
-              <Field as={MaterialInput} type="number" step="any" name="SumTotal" />
-              {errors.sumTotal && (
-                <span style={{ color: "red" }}>{errors.sumTotal}</span>
-              )}
-              <label>Invoice Date</label>
-              <Field type="date" name="date" />
-              {errors.date && (
-                <span style={{ color: "red" }}>{errors.date}</span>
-              )}
-            <div>
-              <MaterialButton disabled={!isValid} type="submit">
-                Submit
-              </MaterialButton>
-            </div>
-          </Form>
-        );
-      }}
-    </Formik>
+    <div>
+      <FileUpload></FileUpload>
+      <Formik
+        enableReinitialize
+        validationSchema={schema}
+        initialValues={{
+          date: new Date().toISOString().split('T')[0],
+          title: "",
+          sumTotal: 0
+        }}
+        onSubmit={values => {
+          const newInvoice = {
+            ...values,
+            status: "Odottaa",
+          };
+          addInvoice(newInvoice);
+        }}
+      >
+        {({ errors, isValid }) => {
+          return (
+            <Form>
+                <Field as={MaterialInput} type="text" name="Title" />
+                {errors.title && (
+                  <span style={{ color: "red" }}>{errors.title}</span>
+                )}
+                <Field as={MaterialInput} type="number" step="any" name="SumTotal" />
+                {errors.sumTotal && (
+                  <span style={{ color: "red" }}>{errors.sumTotal}</span>
+                )}
+                <label>Invoice Date</label>
+                <Field type="date" name="date" />
+                {errors.date && (
+                  <span style={{ color: "red" }}>{errors.date}</span>
+                )}
+              <div>
+                <MaterialButton disabled={!isValid} type="submit">
+                  Submit
+                </MaterialButton>
+              </div>
+            </Form>
+          );
+        }}
+      </Formik>
+    </div>
   );
 }
 
