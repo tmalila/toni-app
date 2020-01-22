@@ -20,6 +20,9 @@ const CONTAINER_NAME = "dev-toniapp-images";
 // });
  
 imageRoutes.post('/image/upload', uploadStrategy, async (req: express.Request, resp: express.Response, next: express.NextFunction) => {
+  if(!req.file) {
+    next("No file found in request.");
+  }
   const newGuid: string = uuid();
   const blobName = newGuid + "_" + req.file.originalname;
   try {

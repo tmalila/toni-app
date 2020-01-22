@@ -21,8 +21,17 @@ export const addInvoice = async (invoice: InvoiceType) => {
   return ret.data;
 };
 
+export const addImage = async (file: File) => {
+  const fd = new FormData();
+  fd.append("image", file);
+  const ret = await axios.post(`${API_URL}/image/upload`, fd, { headers: { "Content-Type": "multipart/form-data" }});
+  console.log("added image:", ret.data);
+  return ret.data;
+};
+
 export default {
   getTodos,
   getInvoices,
-  addInvoice
+  addInvoice,
+  addImage
 };

@@ -15,7 +15,9 @@ export default function uiReducer(state = defaultState, action) {
       return state.update("loadingCount", lc => lc + 1);
 
     case DECREMENT_LOADING_COUNT:
-      return state.update("loadingCount", lc => lc - 1);
+      if(state.get("loadingCount") > 0) {
+        return state.update("loadingCount", lc => lc - 1);
+      }
 
     default:
       return state;
