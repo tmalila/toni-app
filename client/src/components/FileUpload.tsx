@@ -1,9 +1,14 @@
 import React, { FunctionComponent, useState } from "react";
 import MaterialButton from "./MaterialButton";
+import { mdiImage } from '@mdi/js'
+import Icon from "@mdi/react";
+import { useTheme, ThemeProviderProps, EmotionTheming } from "emotion-theming";
+import styled from "./styled";
 
 interface Props{};
 
 const FileUpload: FunctionComponent<Props> = props => {
+  const theme: any = useTheme();
 
   const [image, setImage] = useState<File>();
   const [imagePreview, setImagePreview] = useState<string>("");
@@ -37,9 +42,11 @@ const FileUpload: FunctionComponent<Props> = props => {
         {
           imagePreview ? <img src={ imagePreview } width="100%" height="100%" alt="preview" /> : (
             <>
-              <span>
-                Hello icon
-              </span>
+              <Icon path={mdiImage}
+                title="Image"
+                size={3}
+                color={theme.colors.pink}
+              />
               <h5> Upload your photo</h5>
             </>
           )
