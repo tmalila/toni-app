@@ -1,8 +1,8 @@
 version: "3.1"
 
 services:
-  db:
-    container_name: mongoDB
+  mongo:
+    container_name: toni-app-mongo
     image: mongo:latest
     restart: always
     volumes:
@@ -11,3 +11,11 @@ services:
       - MONGO_INITDB_DATABASE= Toni
     ports:
       - 27017:27017
+  app:
+    container_name: toni-app-express-server
+    restart: always
+    build: ./
+    ports:
+      - "9001:9001"
+    links:
+      - mongo
