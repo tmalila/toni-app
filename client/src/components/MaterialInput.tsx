@@ -30,10 +30,10 @@ const Input = styled.input(({theme}: any) => ({
 interface props {
   name: string,
   value: any,
-  onChange: any,
-  onBlur: any,
+  // onChange: any,
+  // onBlur: any,
   type: any,
-  step: any,
+  step: any | undefined,
 }
 
 function MaterialInput(props: props) {

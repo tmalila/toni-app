@@ -19,3 +19,5 @@ services:
       - "9001:9001"
     links:
       - mongo
+    env_file:
+      - .env
