@@ -8,15 +8,13 @@ import FileUpload from "./FileUpload";
 
 const schema = Yup.object().shape({
   title: Yup.string()
-    .min(2, "Too Short!")
-    .max(50, "Too Long!")
-    .required("Required"),
-    test: Yup.string()
     .min(5, "Too Short!")
     .max(50, "Too Long!")
     .required("Required"),
   sumTotal: Yup.number()
-    .required("Required"),
+    .typeError("SumTotal must be a number")
+    .required("Required")
+    .positive("Sum must be greater than zero"),
   date: Yup.date()
     .required()
 });
@@ -37,7 +35,7 @@ const AddInvoiceForm: FunctionComponent<Props> = props => {
         initialValues={{
           date: new Date().toISOString().split('T')[0],
           title: "",
-          sumTotal: undefined
+          sumTotal: 0
         }}
         onSubmit={values => {
           const newInvoice = {
@@ -54,8 +52,8 @@ const AddInvoiceForm: FunctionComponent<Props> = props => {
                 {errors.title && (
                   <span style={{ color: "red" }}>{errors.title}</span>
                 )}
-                <MaterialInput value="t" step="" type="text" name="test"></MaterialInput>
-                <ErrorMessage component="span" name="test" />
+                {/* <MaterialInput value="t" step="" type="text" name="test"></MaterialInput> */}
+                {/* <ErrorMessage component="span" name="test" /> */}
                 <Field as={MaterialInput} type="number" step="any" name="sumTotal" />
                 {errors.sumTotal && (
                   <span style={{ color: "red" }}>{errors.sumTotal}</span>

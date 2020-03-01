@@ -14,7 +14,7 @@ interface Props {
 const Root: React.FunctionComponent<Props> = props => {
   const { store } = props;
 
-  const [darkMode, setdarkMode] = useState(false);
+  const [darkMode, setdarkMode] = useState(true);
 
   const lightTheme = {
     colors: {

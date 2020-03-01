@@ -34,6 +34,7 @@ interface props {
   // onBlur: any,
   type: any,
   step: any | undefined,
+  setFieldValue: (name: string, event:any) => void,
 }
 
 function MaterialInput(props: props) {
@@ -47,7 +48,7 @@ function MaterialInput(props: props) {
       width: "100%",
       marginBottom: "2rem",
     })}>
-      <Input id={props.name} type={props.type} name={props.name} step={props.step} required></Input>
+      <Input id={props.name} type={props.type} name={props.name} step={props.step} {...props} required></Input>
       <label htmlFor={props.name}
         css={theme => ({
           color: theme.colors.pink,
