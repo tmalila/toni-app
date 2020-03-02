@@ -5,7 +5,8 @@ const InvoiceSchema = new mongoose.Schema({
     title: { type: String, required: true },
     status: { type: String, required: true },
     date: { type: Date, default: Date.now },
-    sumTotal: Number
+    sumTotal: { type: Number, required: true },
+    imageBlobName: {type: String, required: true }
 });
  
 const InvoiceModel = mongoose.model('Invoice', InvoiceSchema);

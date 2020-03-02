@@ -17,7 +17,7 @@ invoiceRoutes.post('/invoice', async (req: express.Request, resp: express.Respon
     const newInvoice = new InvoiceModel(req.body);
     newInvoice.save((error: Error, invoice: MongooseDocument) => {
       if (error) {
-        resp.send(error);
+        resp.status(400).send(error);
       }
       resp.json(invoice);
     });

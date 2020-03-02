@@ -64,7 +64,12 @@ export default function* rootSaga() {
   yield all([
     takeLeading(GET_INVOICES, getInvoices),
     takeEvery(ADD_INVOICE, function*(a) {
-      yield* addInvoice(a.payload, a.history);
+      try {
+        yield* addInvoice(a.payload, a.history);
+      }
+      catch (error) {
+        yield put({ type: ADD_INVOICE_REJECTED, payload: error, error: true });
+      }
     }),
     takeLeading(ADD_IMAGE, function*(a){
       yield* addImage(a.payload.image);

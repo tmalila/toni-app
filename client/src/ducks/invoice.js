@@ -28,6 +28,10 @@ export default function invoiceReducer(state = defaultState, action) {
     case ADD_INVOICE_FULFILLED:
       return state.set(payload.id, payload);
 
+    case ADD_INVOICE_REJECTED:
+      console.log("API Returned: ", payload.response);
+      alert("Invoice was not added succesfully.");
+
     default:
       return state;
   }
