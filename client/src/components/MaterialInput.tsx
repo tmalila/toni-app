@@ -22,6 +22,9 @@ const Input = styled.input(({theme}: any) => ({
   "&:valid + label": {
     top: "0.2rem"
   },
+  "&:disabled + label": {
+    top: "0.2rem"
+  },
   "&:focus + indicator": {
     width: "100% !important"
   }

@@ -30,7 +30,7 @@ export default function invoiceReducer(state = defaultState, action) {
       });
 
     case ADD_INVOICE_FULFILLED:
-      state.delete("-1"); // Delete now useless AddNewInvoice from state
+      state.delete('newinvoice'); // Delete now useless AddNewInvoice from state
       return state.set(payload.id, payload);
 
     case ADD_INVOICE_REJECTED:
@@ -38,21 +38,25 @@ export default function invoiceReducer(state = defaultState, action) {
       alert("Invoice was not added succesfully");
 
     case ADD_IMAGE:
-      return state.set("-1", p => {
-        return {
-          ...p,
-          isLoading: true
-        };
-      });
+      console.log("adding image");
+      return state.set("newinvoice", payload);
+      // return state.set('newinvoice', payload => {
+      //   return {
+      //     ...payload,
+      //     isLoading: true
+      //   };
+      // });
 
     case ADD_IMAGE_FULFILLED:
-      return state.set("-1", p => {
-        return {
-          ...p,
-          imageBlobName: p.blobName,
-          isLoading: false,
-        };
-      });
+      console.log("laitetaan se image invoice!", payload);
+      return state.set("newinvoice", payload);
+      // return state.set('newinvoice', payload => {
+      //   return {
+      //     ...payload,
+      //     imageBlobName: payload.blobName,
+      //     isLoading: false,
+      //   };
+      // });
 
     case ADD_IMAGE_REJECTED:
       console.log("API Returned: ", payload.response);

@@ -28,20 +28,20 @@ interface Props {
 
 const AddInvoiceForm: FunctionComponent<Props> = props => {
   const { addInvoice } = props;
-  const newInvoice: InvoiceType = useSelector((state: any) => state.invoice.get("-1"));
+  const newInvoice: any = useSelector((state: any) => state.invoice.get("newinvoice"));
 
   return(
     <div>
       <FileUpload></FileUpload>
       <Formik
-        enableReinitialize
+        enableReinitialize={true}
         validationSchema={schema}
         initialValues={{
           date: new Date().toISOString().split('T')[0],
           title: "",
           sumTotal: 0,
           _id: "-1",
-          imageBlobName: newInvoice?.imageBlobName,
+          imageBlobName: newInvoice?.blobName || "",
         }}
         onSubmit={values => {
           const newInvoice = {
@@ -64,13 +64,17 @@ const AddInvoiceForm: FunctionComponent<Props> = props => {
                 {errors.sumTotal && (
                   <span style={{ color: "red" }}>{errors.sumTotal}</span>
                 )}
+                 <Field as={MaterialInput} type="text" name="imageBlobName" disabled/>
+                {errors.imageBlobName && (
+                  <span style={{ color: "red" }}>{errors.imageBlobName}</span>
+                )}
                 <label>Invoice Date</label>
                 <Field type="date" name="date" />
                 {errors.date && (
                   <span style={{ color: "red" }}>{errors.date}</span>
                 )}
               <div>
-                <p>Se blobname: {newInvoice?.imageBlobName}</p>
+                <p>Se blobname: {newInvoice?.blobName}</p>
                 <MaterialButton disabled={!isValid} type="submit">
                   Submit
                 </MaterialButton>

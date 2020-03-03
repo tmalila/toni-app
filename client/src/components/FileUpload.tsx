@@ -6,8 +6,7 @@ import { useTheme, ThemeProviderProps, EmotionTheming } from "emotion-theming";
 import styled from "./styled";
 import dataservice from "../services/dataservice";
 import { useDispatch } from "react-redux";
-import { ADD_IMAGE } from "../ducks/image";
-import { image } from "../ducks";
+import { ADD_IMAGE } from "../ducks/invoice";
 import LoadingSpinner from "./LoadingSpinner";
 
 interface Props{};
