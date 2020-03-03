@@ -10,6 +10,10 @@ export const ADD_INVOICE = "ADD_INVOICE";
 export const ADD_INVOICE_FULFILLED = "ADD_INVOICE_FULFILLED";
 export const ADD_INVOICE_REJECTED = "ADD_INVOICE_REJECTED";
 
+export const ADD_IMAGE = "ADD_IMAGE";
+export const ADD_IMAGE_FULFILLED = "ADD_IMAGE_FULFILLED";
+export const ADD_IMAGE_REJECTED = "ADD_IMAGE_REJECTED";
+
 export default function invoiceReducer(state = defaultState, action) {
   const { type, payload } = action;
 
@@ -26,11 +30,33 @@ export default function invoiceReducer(state = defaultState, action) {
       });
 
     case ADD_INVOICE_FULFILLED:
+      state.delete("-1"); // Delete now useless AddNewInvoice from state
       return state.set(payload.id, payload);
 
     case ADD_INVOICE_REJECTED:
       console.log("API Returned: ", payload.response);
-      alert("Invoice was not added succesfully.");
+      alert("Invoice was not added succesfully");
+
+    case ADD_IMAGE:
+      return state.set("-1", p => {
+        return {
+          ...p,
+          isLoading: true
+        };
+      });
+
+    case ADD_IMAGE_FULFILLED:
+      return state.set("-1", p => {
+        return {
+          ...p,
+          imageBlobName: p.blobName,
+          isLoading: false,
+        };
+      });
+
+    case ADD_IMAGE_REJECTED:
+      console.log("API Returned: ", payload.response);
+      alert("Image was not added succesfully");
 
     default:
       return state;

@@ -27,6 +27,7 @@ function* getInvoices() {
 }
 
 function* addInvoice(invoice, history) {
+  invoice._id = undefined; // Do not send clientside id to db. Db returns own instead
   const addedInvoice = yield call(dataservice.addInvoice, invoice);
   try {
     yield put({
@@ -72,7 +73,12 @@ export default function* rootSaga() {
       }
     }),
     takeLeading(ADD_IMAGE, function*(a){
-      yield* addImage(a.payload.image);
+      try {
+        yield* addImage(a.payload.image);
+      }
+      catch (error) {
+        yield put({ type: ADD_IMAGE_REJECTED, payload: error, error: true });
+      }
     }),
     takeEvery([GET_INVOICES, ADD_INVOICE, ADD_IMAGE], function*() {
       yield put({

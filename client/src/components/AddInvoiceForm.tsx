@@ -5,6 +5,7 @@ import * as Yup from "yup";
 import MaterialInput from "./MaterialInput";
 import MaterialButton from "./MaterialButton";
 import FileUpload from "./FileUpload";
+import { useSelector } from "react-redux";
 
 const schema = Yup.object().shape({
   title: Yup.string()
@@ -19,12 +20,15 @@ const schema = Yup.object().shape({
     .required()
 });
 
+
+
 interface Props {
   addInvoice: (invoice: InvoiceType) => void;
 }
 
 const AddInvoiceForm: FunctionComponent<Props> = props => {
   const { addInvoice } = props;
+  const newInvoice: InvoiceType = useSelector((state: any) => state.invoice.get("-1"));
 
   return(
     <div>
@@ -35,7 +39,9 @@ const AddInvoiceForm: FunctionComponent<Props> = props => {
         initialValues={{
           date: new Date().toISOString().split('T')[0],
           title: "",
-          sumTotal: 0
+          sumTotal: 0,
+          _id: "-1",
+          imageBlobName: newInvoice?.imageBlobName,
         }}
         onSubmit={values => {
           const newInvoice = {
@@ -64,6 +70,7 @@ const AddInvoiceForm: FunctionComponent<Props> = props => {
                   <span style={{ color: "red" }}>{errors.date}</span>
                 )}
               <div>
+                <p>Se blobname: {newInvoice?.imageBlobName}</p>
                 <MaterialButton disabled={!isValid} type="submit">
                   Submit
                 </MaterialButton>

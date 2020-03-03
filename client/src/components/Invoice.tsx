@@ -15,6 +15,7 @@ export interface InvoiceType {
   status?: string,
   sumTotal?: number,
   date?: string,
+  imageBlobName?: string,
   isLoading?: boolean | false,
 };
 
